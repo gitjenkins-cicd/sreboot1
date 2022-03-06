@@ -1,6 +1,6 @@
 project_name = "gcp0tohero"
 region = "us-central1"
 zone = "us-central1-a"
-cred_file = "/home/shakeer/gcp0tohero-8641588bc51f.json"
+cred_file = "/var/jenkins_home/serviceaccount.json"
 network_name = "terraform-gcp0tohero"
 bucket_name = "gcp0toherostatefile-4848"
