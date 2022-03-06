@@ -1,0 +1,40 @@
+pipeline {
+
+  agent any
+
+  environment {
+    SVC_ACCOUNT_KEY = credentials('gcp0tohero')
+	version = "${BUILD_NUMBER}"
+	image_tag= 'gcr.io/gcp0tohero/my-web-server:$version'
+	
+	  }
+
+  stages {
+
+	stage('Checkout') {
+    		 steps {
+     		   checkout scm
+      		   sh 'mkdir -p creds' 
+     		   sh 'echo $SVC_ACCOUNT_KEY | base64 -d > ./creds/serviceaccount.json'
+     		       }
+   		 }
+
+	stage('Build Docker Image'){
+		steps{
+			sh("docker build -t ${image_tag} .")
+			sh("gcloud docker -- push ${image_tag}")
+			}
+		}
+	
+	stage('Docker Run'){
+		steps{
+			sh("gcloud container clusters get-credentials gcp0tohero-gke --zone=us-central1")
+			sh("kubectl apply -f deployment1.yml")
+
+			}
+	
+		}
+	
+	}
+}
+

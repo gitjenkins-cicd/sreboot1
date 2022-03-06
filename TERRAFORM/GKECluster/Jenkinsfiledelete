@@ -1,0 +1,42 @@
+pipeline {
+
+  agent any
+
+  environment {
+    SVC_ACCOUNT_KEY = credentials('gcp0tohero')
+  }
+
+  stages {
+
+    stage('Checkout') {
+      steps {
+        checkout scm
+        sh 'mkdir -p creds' 
+        sh 'echo $SVC_ACCOUNT_KEY | base64 -d > ./creds/serviceaccount.json'
+      }
+    }
+
+    stage('TF Plan') {
+      steps {
+          sh 'cd TERRAFORM/GKECluster ; terraform init'
+          sh 'cd TERRAFORM/GKECluster ; terraform plan -destroy  -out myplandestroy'
+        }
+    }
+
+    stage('Approval') {
+      steps {
+        script {
+          def userInput = input(id: 'confirm', message: 'Destroy Terraform?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Destroy terraform', name: 'confirm'] ])
+        }
+      }
+    }
+
+    stage('TF Destroy') {
+      steps {
+          sh 'cd TERRAFORM/GKECluster ;terraform apply -input=false myplandestroy'
+        }
+      }
+
+  } 
+
+}

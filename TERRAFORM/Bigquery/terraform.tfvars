@@ -1,0 +1,6 @@
+project_name = "gcp0tohero"
+region = "us-central1"
+zone = "us-central1-a"
+cred_file = "/home/shakeer/gcp0tohero-7d764dbc5ba3.json"
+#cred_file = "gcp0tohero-6be81213cd05.json"
+network_name = "terraform-gcp0tohero"

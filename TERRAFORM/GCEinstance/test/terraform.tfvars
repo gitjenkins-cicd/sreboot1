@@ -1,0 +1,5 @@
+project_name = "gcp0tohero"
+region = "us-central1"
+zone = "us-central1-a"
+cred_file = "path/to/jsonfile/xx.json"
+network_name = "terraform-gcp0tohero"

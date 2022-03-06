@@ -1,0 +1,61 @@
+apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
+kind: Deployment
+metadata:
+  name: nginx
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: nginx
+  replicas: 1 # tells deployment to run 1 pods matching the template
+  template: # create pods using pod definition in this template
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: gcr.io/gcp0tohero/my-web-server:v1
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: "200m"
+          requests:
+            cpu: "100m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx
+  namespace: default
+  labels:
+    app: nginx
+
+spec:
+  externalTrafficPolicy: Local
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+    nodePort: 31313
+  selector:
+    app: nginx
+  type: LoadBalancer
+  
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: nginx
+  namespace: default
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1beta1
+    kind: Deployment
+    name: nginx
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 3
