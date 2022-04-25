@@ -12,7 +12,7 @@ spec:
     image: nginx:latest
     resources:
       limits:
-        memory: 30Mi
-        cpu: 300m
+        memory: memorylimit
+        cpu: cpulimit
     ports:
       - containerPort: 80
