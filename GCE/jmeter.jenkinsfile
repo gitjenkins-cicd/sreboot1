@@ -1,6 +1,7 @@
 pipeline{
-    agent any
-    
+    agent{
+        label "sregkepod"
+    }
     stages{
         stage("git clone"){
             steps{
@@ -23,8 +24,11 @@ pipeline{
         stage("Deploying pod on K8s cluster"){
             steps{
             script{
-                sh "gcloud container clusters get-credentials sre-gke --region us-central1-c --project shakeersreboot"
+                sh "gcloud container clusters get-credentials sre-gke --region us-central1-c --project us-central1-c"
                 sh "kubectl get po"
+                sh "https_proxy=34.122.175.35:8443 kubectl apply -f GCE/jmeterpod.yaml"
+
+
             }
 
             }
