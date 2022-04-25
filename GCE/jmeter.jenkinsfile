@@ -1,7 +1,6 @@
 pipeline{
-    agent{
-        label "sregkepod"
-    }
+    agent any
+    
     stages{
         stage("git clone"){
             steps{
