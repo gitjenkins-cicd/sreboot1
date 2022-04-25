@@ -15,7 +15,7 @@ spec:
         memory: memorylimit
         cpu: cpulimit
     tty: true
-    - command:
-      - "cat"
+  - command:
+    - "cat"
     ports:
       - containerPort: 80
