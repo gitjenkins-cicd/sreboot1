@@ -37,6 +37,7 @@ pipeline{
         }
 
         stage("Running command inside jmeter"){
+          agent kubernetes
           steps{
              container("jmeter"){
                script{
