@@ -32,15 +32,18 @@ pipeline{
             }
 
             }
-            steps{
-              container("jmeter"){
-                script{
-                  sh "echo inside jmeter container"
-                  sh "jmeter -help"
-                  }
-              }
-            }
+            
 
+        }
+
+        stage("Running command inside jmeter"){
+          steps{
+           script{
+              sh "echo inside jmeter container"
+              sh "nginx -v"
+              sh "jmeter --help"
+           }
+          }
         }
         
     }
