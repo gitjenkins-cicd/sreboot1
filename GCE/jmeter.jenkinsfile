@@ -26,7 +26,7 @@ pipeline{
                 sh "kubectl get po"
                 sh "sed -i \'s/{memorylimit}/${memorylimit1}/g' GCE/jmeter.yml"
                 sh "sed -i \'s/{cpulimit}/${cpulimit1}/g' GCE/jmeter.yml"
-                sh "https_proxy=34.122.175.35:8443 kubectl apply -f GCE/jmeter.yml"
+                sh "kubectl apply -f GCE/jmeter.yml"
 
 
             }
