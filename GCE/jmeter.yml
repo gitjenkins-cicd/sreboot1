@@ -4,11 +4,10 @@ metadata:
   annotations: 
     sidecar.istio.io/rewriteAppHTTPProbers: "true"
   name: jmeter
-  labels:
-    name: myapp
+  
 spec:
   containers:
-  - name: nginx
+  - name: "nginx"
     image: nginx:latest
     resources:
       limits:
