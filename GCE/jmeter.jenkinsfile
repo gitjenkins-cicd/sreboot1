@@ -6,7 +6,7 @@ pipeline{
         stage("git clone"){
             steps{
                 echo "cloning git repo"
-                git clone https://github.com/gitjenkins-cicd/sreboot1.git
+                git clone "https://github.com/gitjenkins-cicd/sreboot1.git"
             }
             post{
                 always{
