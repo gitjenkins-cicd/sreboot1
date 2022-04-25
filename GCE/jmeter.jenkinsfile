@@ -23,7 +23,7 @@ pipeline{
         stage("Deploying pod on K8s cluster"){
             steps{
             script{
-                sh "gcloud container clusters get-credentials sre-gke --region us-central1-c --project us-central1-c"
+                sh "gcloud container clusters get-credentials sre-gke --region us-central1-c --project shakeersreboot"
                 sh "kubectl get po"
             }
 
