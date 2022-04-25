@@ -23,6 +23,7 @@ pipeline{
             steps{
             script{
                 sh "gcloud container clusters get-credentials sre-gke --region us-central1-c --project shakeersreboot"
+                sh "ls -lrth"
                 sh "kubectl get po"
                
                 sh " kubectl apply -f GCE/jmeterpod.yaml"
