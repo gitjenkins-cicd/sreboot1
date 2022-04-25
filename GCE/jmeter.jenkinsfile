@@ -24,8 +24,8 @@ pipeline{
             script{
                 sh "gcloud container clusters get-credentials sre-gke --region us-central1-c --project shakeersreboot"
                 sh "kubectl get po"
-                sh "telnet 34.122.175.35 8443"
-                sh "https_proxy=34.122.175.35:8443 kubectl apply -f GCE/jmeterpod.yaml"
+               
+                sh " kubectl apply -f GCE/jmeterpod.yaml"
 
 
             }
