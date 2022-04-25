@@ -1,0 +1,36 @@
+pipeline{
+    agent{
+        label "sregkepod"
+    }
+    stages{
+        stage("git clone"){
+            steps{
+                echo "cloning git repo"
+            }
+            post{
+                always{
+                    echo "========always========"
+                }
+                success{
+                    echo "downloaded successfully"
+                }
+                failure{
+                    echo "Issue in downloading repo"
+                }
+            }
+            --------------------------------------------------------------------------------------------------------------------------------------------
+
+
+            
+        }
+        stage("Deploying pod on K8s cluster"){
+            script{
+                sh "gcloud container clusters get-credentials sre-gke --region us-central1-c --project us-central1-c"
+                sh "kubectl get po"
+
+            }
+
+        }
+    }
+    
+}
