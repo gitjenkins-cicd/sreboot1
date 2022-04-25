@@ -7,7 +7,7 @@ metadata:
   
 spec:
   containers:
-    name: jmeter
+  - name: jmeter
     image: nginx:latest
     resources:
       limits:
