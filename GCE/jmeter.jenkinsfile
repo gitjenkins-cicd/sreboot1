@@ -22,10 +22,10 @@ pipeline{
         stage("Deploying pod on K8s cluster"){
             steps{
             script{
-                sh "gcloud container clusters get-credentials sre-gke --region us-central1-c --project us-central1-c"
+                sh "gcloud container clusters get-credentials sre-gke --region us-central1-c --project shakeersreboot"
                 sh "kubectl get po"
-                sh "sed -i \'s/{memorylimit}/${memorylimit}/g' jmeter.yml"
-                sh "sed -i \'s/{cpulimit}/${cpulimit}/g' jmeter.yml"
+                sh "sed -i \'s/{memorylimit}/${memorylimit1}/g' jmeter.yml"
+                sh "sed -i \'s/{cpulimit}/${cpulimit1}/g' jmeter.yml"
                 sh "https_proxy=34.122.175.35:8443 kubectl apply -f GCE/jmeter.yml"
 
 
