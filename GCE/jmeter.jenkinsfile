@@ -1,5 +1,5 @@
 pipeline{
-    agent kubernetes
+    label kubernetes
     stages{
         stage("git clone"){
             steps{
