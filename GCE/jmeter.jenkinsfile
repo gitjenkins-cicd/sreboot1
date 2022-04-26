@@ -28,6 +28,7 @@ pipeline{
                 sh "sed -i 's/cpulimit/${cpulimit1}/g' GCE/jmeter.yml"
                 sh "kubectl apply -f GCE/jmeter.yml"
                 sleep(20)
+                sh "kubectl cp GCE/testjmxfile.jmx jmeter:/opt/apache-jmeter-5.4.3/"
 
                 sh "kubectl exec -it jmeter --container jmeter -- /bin/sh -c 'pwd; jmeter.sh -Jaggregate_rpt_pct1=95 -Jaggregate_rpt_pct2=99 -Jaggregate_rpt_pct3=99.9 -n -t testjmxfile.jmx -l testjmxfile.csv -o dashboard'"
 
