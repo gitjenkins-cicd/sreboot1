@@ -30,11 +30,11 @@ pipeline{
 
 
             }
-            steps {
+            
               container("jmeter"){
                 sh "echo inside jmeter container"
               }
-            }
+            
           }
 
         
