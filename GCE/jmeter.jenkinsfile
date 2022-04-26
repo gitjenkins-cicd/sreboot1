@@ -24,6 +24,7 @@ pipeline{
             script{
                 sh "gcloud container clusters get-credentials sre-gke --region us-central1-c --project shakeersreboot"
                 sh "kubectl get po"
+                sh "ls -lrth"
                 sh "sed -i 's/memorylimit/${memorylimit1}/g' GCE/jmeter.yml"
                 sh "sed -i 's/cpulimit/${cpulimit1}/g' GCE/jmeter.yml"
                 sh "kubectl apply -f GCE/jmeter.yml"
