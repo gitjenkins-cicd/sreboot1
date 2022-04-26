@@ -30,14 +30,17 @@ pipeline{
 
 
             }
-
-           
-
-            }
-            
-
+          }
+        
         }
-
+        stage("run commnands inside container"){
+          steps {
+            container("jmeter"){
+                 sh "echo inside jmeter container"
+              }
+             
+          }
+        }
 
         
     }
