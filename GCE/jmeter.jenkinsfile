@@ -27,6 +27,7 @@ pipeline{
                 sh "sed -i 's/memorylimit/${memorylimit1}/g' GCE/jmeter.yml"
                 sh "sed -i 's/cpulimit/${cpulimit1}/g' GCE/jmeter.yml"
                 sh "kubectl apply -f GCE/jmeter.yml"
+                sleep(20)
 
                 sh "kubectl exec -it jmeter --container jmeter -- /bin/sh -c 'jmeter --help'"
 
