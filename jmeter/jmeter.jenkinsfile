@@ -1,0 +1,47 @@
+pipeline{
+    agent  any
+    stages{
+        stage("git clone"){
+            steps{
+                echo "cloning git repo"
+                //git clone "https://github.com/gitjenkins-cicd/sreboot1.git"
+            }
+            post{
+                always{
+                    echo "========always========"
+                }
+                success{
+                    echo "downloaded successfully"
+                }
+                failure{
+                    echo "Issue in downloading repo"
+                }
+            }
+            
+        }
+        stage("Deploying pod on K8s cluster"){
+            steps{
+            script{
+                sh "gcloud container clusters get-credentials sre-gke --region us-central1-c --project shakeersreboot"
+                sh "kubectl get po"
+                sh "sed -i 's/memorylimit/${memorylimit1}/g' GCE/jmeter.yml"
+                sh "sed -i 's/cpulimit/${cpulimit1}/g' GCE/jmeter.yml"
+                sh "kubectl apply -f GCE/jmeter.yml"
+
+                sh "kubectl exec -it jmeter --container jmeter -- /bin/sh -c 'jmeter.sh -Jaggregate_rpt_pct1=95 -Jaggregate_rpt_pct2=99 -Jaggregate_rpt_pct3=99.9 -n -t testjmxfile.jmx -l testjmxfile.csv -o dashboard'"
+
+
+            }
+            
+             
+            
+          }
+
+        
+        }
+        
+
+        
+    }
+    
+}
