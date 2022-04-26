@@ -15,7 +15,7 @@ spec:
         cpu: cpulimit
     ports:
       - containerPort: 80
-    /*tty: true*/
+    
 
   
   
