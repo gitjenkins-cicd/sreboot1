@@ -8,7 +8,7 @@ metadata:
 spec:
   containers:
   - name: jmeter
-    image: nginx:latest
+    image: justb4/jmeter:5.4
     resources:
       limits:
         memory: memorylimit
