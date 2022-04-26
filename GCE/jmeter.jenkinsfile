@@ -31,7 +31,7 @@ pipeline{
                 sleep(20)
                 sh "kubectl cp GCE/test-jmxfile.jmx jmeter:/opt/apache-jmeter-5.4.3/"
 
-                sh "kubectl exec -it jmeter --container jmeter -- /bin/sh -c 'pwd; jmeter.sh -Jaggregate_rpt_pct1=95 -Jaggregate_rpt_pct2=99 -Jaggregate_rpt_pct3=99.9 -n -t testjmxfile.jmx -l testjmxfile.csv -o dashboard'"
+                sh "kubectl exec -it jmeter --container jmeter -- /bin/sh -c 'pwd; jmeter.sh -Jaggregate_rpt_pct1=95 -Jaggregate_rpt_pct2=99 -Jaggregate_rpt_pct3=99.9 -n -t test-jmxfile.jmx -l test-jmxfile.csv -o dashboard'"
 
 
             }
