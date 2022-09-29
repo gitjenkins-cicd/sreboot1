@@ -1,0 +1,2 @@
+@Library('sample-library') _
+helloWorld(dayOfWeek:"thursday", name: "shakeer")
