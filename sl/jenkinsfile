@@ -1,2 +1,11 @@
 @Library('sample-library') _
-helloWorld(dayOfWeek:"thursday", name: "shakeer")
+pipeline {
+    agent any
+    stages {
+        stage ('Example') {
+            steps {
+                helloWorld(dayOfWeek:"thursday", name: "shakeer")
+                }
+            }
+        }
+    }
